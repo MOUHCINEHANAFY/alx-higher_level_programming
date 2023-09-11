@@ -7,7 +7,7 @@
 void print_python_list_info(PyObject *p)
 {
 	int lenght;
-    int container, idx;
+	int container, idx;
 	PyObject *obj;
 
 	lenght = Py_SIZE(p);
