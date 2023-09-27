@@ -11,7 +11,7 @@ class MagicClass:
         """Initialize a MagicClass.
 
         Arg:
-            radius (float or int): The radius of the new MagicClass.
+            radius (float or int): The rad new MagicClass.
         """
         self.__radius = 0
         if type(radius) is not int and type(radius) is not float:
