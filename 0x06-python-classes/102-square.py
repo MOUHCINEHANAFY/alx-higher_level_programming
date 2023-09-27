@@ -1,55 +1,55 @@
 #!/usr/bin/python3
-"""Définir une classe Carré (Square)."""
+"""Définir une classe Carré."""
 
 
-class Carré:
+class Square:
     """Représente un carré."""
 
-    def __init__(self, taille=0):
+    def __init__(self, size=0):
         """Initialiser un nouveau carré.
 
         Args:
-            taille (int): La taille du nouveau carré.
+            size (int): La taille du nouveau carré.
         """
-        self.taille = taille
+        self.size = size
 
     @property
-    def taille(self):
+    def size(self):
         """Obtenir/définir la taille actuelle du carré."""
-        return self.__taille
+        return (self.__size)
 
-    @taille.setter
-    def taille(self, valeur):
-        if not isinstance(valeur, int):
-            raise TypeError("la taille doit être un entier")
-        elif valeur < 0:
-            raise ValueError("la taille doit être >= 0")
-        self.__taille = valeur
+    @size.setter
+    def size(self, value):
+        if not isinstance(value, int):
+            raise TypeError("size doit être un entier")
+        elif value < 0:
+            raise ValueError("size must be >= 0")
+        self.__size = value
 
-    def aire(self):
+    def area(self):
         """Retourner l'aire actuelle du carré."""
-        return self.__taille * self.__taille
+        return (self.__size * self.__size)
 
-    def __eq__(self, autre):
+    def __eq__(self, other):
         """Définir la comparaison == pour un Carré."""
-        return self.aire() == autre.aire()
+        return self.area() == other.area()
 
-    def __ne__(self, autre):
+    def __ne__(self, other):
         """Définir la comparaison != pour un Carré."""
-        return self.aire() != autre.aire()
+        return self.area() != other.area()
 
-    def __lt__(self, autre):
+    def __lt__(self, other):
         """Définir la comparaison < pour un Carré."""
-        return self.aire() < autre.aire()
+        return self.area() < other.area()
 
-    def __le__(self, autre):
+    def __le__(self, other):
         """Définir la comparaison <= pour un Carré."""
-        return self.aire() <= autre.aire()
+        return self.area() <= other.area()
 
-    def __gt__(self, autre):
+    def __gt__(self, other):
         """Définir la comparaison > pour un Carré."""
-        return self.aire() > autre.aire()
+        return self.area() > other.area()
 
-    def __ge__(self, autre):
+    def __ge__(self, other):
         """Définir la comparaison >= pour un Carré."""
-        return self.aire() >= autre.aire()
+        return self.area() >= other.area()
