@@ -1,70 +1,61 @@
 #!/usr/bin/python3
-"""Solves the N-queens puzzle.
-
-Determines all possible solutions to placing N
-non-attacking queens on an NxN chessboard.
-
-Usage: nqueens N
-
-N must be an integer greater than or equal to 4.
 """
-
+Script that solves the N queens problem based on the general Backtracking
+"""
 import sys
 
-def is_safe(board, row, col):
-    """Check if it's safe to place a queen at the given row and column."""
-    # Check the left side of the row
-    for i in range(col):
-        if board[row][i] == 'Q':
-            return False
 
-    # Check upper left diagonal
-    for i, j in zip(range(row, -1, -1), range(col, -1, -1)):
-        if board[i][j] == 'Q':
+def valid_pos(solution, pos):
+    """
+    Function that verifies if the position is valid
+    """
+    for queen in solution:
+        if queen[1] == pos[1]:
             return False
-
-    # Check lower left diagonal
-    for i, j in zip(range(row, len(board)), range(col, -1, -1)):
-        if board[i][j] == 'Q':
+        if (queen[0] + queen[1]) == (pos[0] + pos[1]):
             return False
-
+        if (queen[0] - queen[1]) == (pos[0] - pos[1]):
+            return False
     return True
 
-def solve_nqueens(board, col, solutions):
-    """Recursively solve the N-Queens puzzle."""
-    n = len(board)
 
-    if col == n:
-        solutions.append([''.join(row) for row in board])
-        return
+def solve_queens(row, n, solution):
+    """
+    Function that finds the solution recursively, from the root down
+    """
+    if (row == n):
+        print(solution)
+    else:
+        for col in range(n):
+            pos = [row, col]
+            if valid_pos(solution, pos):
+                solution.append(pos)
+                solve_queens(row + 1, n, solution)
+                solution.remove(pos)
 
-    for row in range(n):
-        if is_safe(board, row, col):
-            board[row][col] = 'Q'
-            solve_nqueens(board, col + 1, solutions)
-            board[row][col] = ' '
 
-def main():
+def main(n):
+    """
+    Main function
+    """
+    solution = []
+    """ From root(0) down(n) """
+    solve_queens(0, n, solution)
+
+if __name__ == '__main__':
+    """ Validate the arguments from OS """
     if len(sys.argv) != 2:
-        print("Usage: nqueens N")
+        print('Usage: nqueens N')
         sys.exit(1)
-
     try:
-        n = int(sys.argv[1])
-        if n < 4:
-            raise ValueError
-    except ValueError:
-        print("N must be a number")
+        i = int(sys.argv[1])
+    except BaseException:
+        print('N must be a number')
+        sys.exit(1)
+    i = int(sys.argv[1])
+    if i < 4:
+        print('N must be at least 4')
         sys.exit(1)
 
-    board = [[' ' for _ in range(n)] for _ in range(n)]
-    solutions = []
-    solve_nqueens(board, 0, solutions)
-
-    for solution in solutions:
-        for row in solution:
-            print(row)
-        print()
-
-if __name__ == "__main__":
-    main()
+    """ Calling the main function """
+    main(i)
