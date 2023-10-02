@@ -1,18 +1,18 @@
 #!/usr/bin/python3
-"""Solves the N-queens puzzle."""
+"""Solves the N-queens puzzle.
+
+Determines all possible solutions to placing N
+non-attacking queens on an NxN chessboard.
+
+Usage: nqueens N
+
+N must be an integer greater than or equal to 4.
+"""
 
 import sys
 
-
-def init_board(n):
-    """Initialize an `n`x`n` sized chessboard with empty squares."""
-    return [[' ' for _ in range(n)] for _ in range(n)]
-
-
 def is_safe(board, row, col):
     """Check if it's safe to place a queen at the given row and column."""
-    n = len(board)
-
     # Check the left side of the row
     for i in range(col):
         if board[row][i] == 'Q':
@@ -24,12 +24,11 @@ def is_safe(board, row, col):
             return False
 
     # Check lower left diagonal
-    for i, j in zip(range(row, n), range(col, -1, -1)):
+    for i, j in zip(range(row, len(board)), range(col, -1, -1)):
         if board[i][j] == 'Q':
             return False
 
     return True
-
 
 def solve_nqueens(board, col, solutions):
     """Recursively solve the N-Queens puzzle."""
@@ -45,7 +44,6 @@ def solve_nqueens(board, col, solutions):
             solve_nqueens(board, col + 1, solutions)
             board[row][col] = ' '
 
-
 def main():
     if len(sys.argv) != 2:
         print("Usage: nqueens N")
@@ -56,10 +54,10 @@ def main():
         if n < 4:
             raise ValueError
     except ValueError:
-        print("N must be an integer greater than or equal to 4")
+        print("N must be a number")
         sys.exit(1)
 
-    board = init_board(n)
+    board = [[' ' for _ in range(n)] for _ in range(n)]
     solutions = []
     solve_nqueens(board, 0, solutions)
 
@@ -67,7 +65,6 @@ def main():
         for row in solution:
             print(row)
         print()
-
 
 if __name__ == "__main__":
     main()
