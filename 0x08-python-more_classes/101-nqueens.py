@@ -6,17 +6,17 @@ def is_safe(board, row, col):
     """Check if it's safe to place a queen at a given position."""
     # Check row on the left
     for i in range(col):
-        if board[row][i] == "Q":
+        if board[row][i] == 1:
             return False
 
     # Check upper diagonal on the left
     for i, j in zip(range(row, -1, -1), range(col, -1, -1)):
-        if board[i][j] == "Q":
+        if board[i][j] == 1:
             return False
 
     # Check lower diagonal on the left
     for i, j in zip(range(row, len(board), 1), range(col, -1, -1)):
-        if board[i][j] == "Q":
+        if board[i][j] == 1:
             return False
 
     return True
@@ -26,16 +26,16 @@ def solve_nqueens(n):
     """Solve the N-queens puzzle using backtracking."""
     def backtrack(row):
         if row == n:
-            solutions.append(["".join(row) for row in board])
+            solutions.append([[i, row] for i, val in enumerate(board[row]) if val == 1])
             return
 
         for col in range(n):
             if is_safe(board, row, col):
-                board[row][col] = "Q"
+                board[row][col] = 1
                 backtrack(row + 1)
-                board[row][col] = "."
+                board[row][col] = 0
 
-    board = [["." for _ in range(n)] for _ in range(n)]
+    board = [[0 for _ in range(n)] for _ in range(n)]
     solutions = []
     backtrack(0)
     return solutions
@@ -56,6 +56,4 @@ if __name__ == "__main__":
 
     solutions = solve_nqueens(n)
     for solution in solutions:
-        for row in solution:
-            print(row)
-        print()
+        print(solution)
