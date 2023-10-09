@@ -1,11 +1,10 @@
 #!/usr/bin/python3
-"""
-class that inherits from list
-"""
+"""Inhereted list class MyList."""
 
 
 class MyList(list):
-    """class inherits from list"""
+    """Print sorted classes."""
+
     def print_sorted(self):
-        """ Sorted list print"""
+        """Print a list in sorted ascending order."""
         print(sorted(self))
