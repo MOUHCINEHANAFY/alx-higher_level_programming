@@ -1,4 +1,5 @@
 -- script that lists all records with names
-SELECT city, AVG(value) as avg_temp 
-FROM temperatures 
-GROUP BY city ORDER BY avg_temp DESC;
+SELECT `state`, MAX(`value`) AS `max_temp`
+FROM `temperatures`
+GROUP BY `state`
+ORDER BY `state`;
