@@ -1,6 +1,7 @@
---Comment to be updated
-SELECT title, SUM(tv_show_ratings.rate) 'rating'
-FROM tv_shows
-LEFT JOIN tv_show_ratings ON tv_show_ratings.show_id = tv_shows.id
-GROUP BY title
+-- Ce script répertorie toutes les émissions de "hbtn_0d_tvshows_rate" selon leur évaluation
+SELECT sh.title, SUM(sr.rate) AS rating
+FROM tv_shows AS sh
+INNER JOIN tv_show_ratings AS sr
+ON sh.id = sr.show_id
+GROUP BY sh.title
 ORDER BY rating DESC;

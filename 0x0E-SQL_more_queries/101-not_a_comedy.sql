@@ -1,11 +1,14 @@
---comment to be updated
-SELECT title
-FROM tv_shows
-WHERE title NOT IN
-(SELECT title
-	FROM tv_shows
-	LEFT JOIN tv_show_genres ON tv_shows.id = tv_show_genres.show_id
-	LEFT JOIN tv_genres ON tv_show_genres.genre_id = tv_genres.id
-	WHERE tv_genres.name = 'Comedy')
-GROUP BY title
-ORDER BY title ASC;
+-- Ce script répertorie toutes les émissions sans le genre "Comédie" dans la base de données "hbtn_0d_tvshows"
+SELECT sh.title
+FROM tv_shows AS sh
+WHERE sh.title NOT IN
+(
+	    SELECT sh.title
+	    FROM tv_shows AS sh
+	    INNER JOIN tv_show_genres AS sg
+	    ON sh.id = sg.show_id
+	    INNER JOIN tv_genres AS ge
+	    ON ge.id = sg.genre_id
+	    WHERE ge.name = 'Comedy'
+)
+ORDER BY sh.title;

@@ -1,6 +1,9 @@
---Comment to be reviewed later
-SELECT title, SUM(tv_show_ratings.rate) 'rating'
-FROM tv_shows
-LEFT JOIN tv_show_ratings ON tv_show_ratings.show_id = tv_shows.id
-GROUP BY title
+-- Liste tous les genres selon leur évaluation
+SELECT name, SUM(rate) AS rating
+FROM tv_genres AS ge
+INNER JOIN tv_show_genres AS sg
+ON sg.genre_id = ge.id
+INNER JOIN tv_show_ratings AS sr
+ON sr.show_id = sg.show_id
+GROUP BY ge.name
 ORDER BY rating DESC;

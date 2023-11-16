@@ -1,6 +1,6 @@
---LList shows linked by genres in db
-SELECT title, name
-FROM tv_shows
-LEFT JOIN tv_show_genres ON tv_shows.id = tv_show_genres.show_id
-LEFT JOIN tv_genres ON tv_show_genres.genre_id = tv_genres.id
-ORDER BY title ASC, name ASC;
+-- Ce script répertorie toutes les émissions et tous les genres liés à cette émission dans la base de données "hbtn_0d_tvshows"
+SELECT tv_shows.title, tv_genres.name
+FROM tv_show_genres
+RIGHT JOIN tv_shows ON tv_shows.id = tv_show_genres.show_id
+LEFT JOIN tv_genres ON tv_genres.id = tv_show_genres.genre_id
+ORDER BY tv_shows.title, tv_genres.name;
