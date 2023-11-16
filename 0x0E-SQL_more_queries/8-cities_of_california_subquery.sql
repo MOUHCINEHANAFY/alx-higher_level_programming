@@ -1,4 +1,4 @@
---Task 8 comment to be updated
+--This script list cities of caly in  the db "hbtn_0d_usa"
 SELECT id, name FROM cities
 WHERE state_id = (
 	SELECT id FROM states
