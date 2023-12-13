@@ -1,4 +1,4 @@
-/bin/bash: line 1: q: command not found
+#!/usr/bin/node
 
 const Rectangle = require('./4-rectangle');
 
